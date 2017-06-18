@@ -95,6 +95,13 @@ class Mol:
         coor = np.dot(self.refCoor, R.T)
         coor += Xcom
         return coor
+    
+    def XR2Atomic(self, Xcom, R):
+        #coor = np.dot(self.refCoor, R.T)
+        coor = np.dot(self.refCoor, R.T)
+        coor += Xcom
+        coor = np.array(coor)
+        return coor
 
     def coor2PDB(self, coor, frg_idx=0, occupancy=1.0, bfactor=0.0):
         pdb = ''
@@ -109,7 +116,10 @@ class Mol:
     def Xq2PDB(self, Xcom=(0.,0.,0), q=(1.,0.,0.,0.), frg_idx=0, occupancy=1.0, bfactor=0.0):
         coor = self.Xq2Atomic(Xcom, q)
         return self.coor2PDB(coor, frg_idx, occupancy, bfactor)
-    
+
+    def XR2PDB(self, Xcom=(0.,0.,0), R=None, frg_idx=0, occupancy=1.0, bfactor=0.0):
+        coor = self.XR2Atomic(Xcom, R)
+        return self.coor2PDB(coor, frg_idx, occupancy, bfactor)
     def coor2INP(self, coor):
         inp = ''
         for i in range(self.n):
