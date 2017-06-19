@@ -24,36 +24,6 @@ def axisAng2R(axis,angle):
                            [2*(b*c+a*d), a*a+c*c-b*b-d*d, 2*(c*d-a*b)],
                            [2*(b*d-a*c), 2*(c*d+a*b), a*a+d*d-b*b-c*c]])
         return rotmat
-def R2axisAng(R):
-    """Conversion Matrix to Axis Angle
-    http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/
-    """
-    epsilon = 0.01 # margin to allow for rounding errors
-    epsilon2 = 0.1 # margin to distinguish between 0 and 180 degrees
-    if (abs(R[0,1]-R[1,0]<epsilon 
-        and abs(R[0,2]-R[2,0]<epsilon
-        and abs(R[1,2]-R[2,1]<epsilon):
-        # singularity found
-        # first check for identity matrix which must have +1 for all terms
-        # in leading diagonaland zero in other terms
-        if (abs(R[0,1]+R[1,0]< epsilon2
-            and abs(R[0,2]+R[2,0]< epsilon2
-            and abs(R[1,2]+R[2,1]< epsilon2
-            and abs(R[0,0]+R[1,1]+R[2,2]-3.) < epsilon2):
-            # this singularity is identity matrix so angle = 0
-            return np.array((1., 0., 0.)), 0. # arbitrary axis, zero angle
-        # otherwise this singularity is angle = 180
-        angle = np.pi
-        axis = [0.0]
-        xx = (R[0,0]+1)/2.
-        yy = (R[1,1]+1)/2.
-        zz = (R[2,2]+1)/2.
-        xy = (R[0,1]+R[1,0])/4.
-        xz = (R[0,2]+R[2,0])/4.
-        yz = (R[1,2]+R[2,1])/4.
-        if ((xx > yy) and (xx > zz)):
-            if xx< epsilon:
-                x 
 
 # Functions for quaternion algebra, quaternion-rotation matrix conversion,
 # Cartesian-spherical coordinate conversion, etc.
